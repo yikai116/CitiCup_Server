@@ -3,5 +3,23 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="dao.UserMapper">
-
+    <select id="findByPhone" parameterType="String" resultType="User">
+        SELECT *
+        FROM User
+        WHERE phone = #{0}
+    </select>
+    <insert id="insert" parameterType="User">
+        INSERT INTO User(phone, name, psw, token)
+        VALUES (#{phone},#{name},#{psw},#{token})
+    </insert>
+    <update id="updateToken" parameterType="String">
+        UPDATE User
+        SET token = #{1}
+        WHERE phone = #{0}
+    </update>
+    <update id="updatePsw" parameterType="String">
+        UPDATE User
+        SET psw = #{1}
+        WHERE phone = #{0}
+    </update>
 </mapper>

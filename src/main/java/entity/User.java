@@ -7,6 +7,8 @@ public class User {
     String phone;
     String name;
     String psw;
+    String token;
+    String code;
 
     public String getPhone() {
         return phone;
@@ -30,5 +32,21 @@ public class User {
 
     public void setPsw(String psw) {
         this.psw = psw;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 }
