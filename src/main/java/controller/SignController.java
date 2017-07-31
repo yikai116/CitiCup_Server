@@ -114,7 +114,7 @@ public class SignController {
     public Response getSignUpVerCode(String phone){
         try {
             User user = userMapper.findByPhone(phone);
-            if (user == null){
+            if (user != null){
                 return new Response(new Status(0,"该手机号已注册"));
             }
             return new Response<Code>(new Status(1,"获取成功"),getCode(phone));

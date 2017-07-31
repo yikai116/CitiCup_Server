@@ -2,6 +2,7 @@ package helper;
 
 import java.security.MessageDigest;
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.Random;
 
@@ -61,11 +62,11 @@ public class Helper {
      * @param date 需要被判断的时间
      * @return 是否过期
      */
-    public static boolean isExpired(Date date){
+    public static boolean isExpired(Timestamp date){
         Calendar calendar = Calendar.getInstance();
         java.util.Date utilDate = calendar.getTime();
         //java.util.Date日期转换成转成java.sql.Date格式
-        Date nowDate = new Date(utilDate.getTime());
+        Timestamp nowDate = new Timestamp(utilDate.getTime());
         return nowDate.after(date);
     }
 }

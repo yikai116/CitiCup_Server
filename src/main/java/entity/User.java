@@ -4,11 +4,22 @@ package entity;
  * Created by p on 2017/7/30.
  */
 public class User {
-    String phone;
-    String name;
-    String psw;
-    String token;
-    String code;
+    private String phone;
+    private String name;
+    private String psw;
+    private String token;
+    private String code;
+
+    public User() {
+    }
+
+    public User(String phone, String name, String psw, String token, String code) {
+        this.phone = phone;
+        this.name = name;
+        this.psw = psw;
+        this.token = token;
+        this.code = code;
+    }
 
     public String getPhone() {
         return phone;

@@ -2,7 +2,7 @@ package entity;
 
 import helper.Helper;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 /**
  * Created by p on 2017/7/31.
@@ -10,12 +10,21 @@ import java.sql.Date;
 public class Code {
     private String phone;
     private String code;
-    private Date date;
+    private Timestamp date;
+
+    public Code() {
+    }
 
     public Code(String phone) {
         this.phone = phone;
         code = Helper.getVerCode();
-        date = new Date(new java.util.Date().getTime() + 5 * 60 * 1000);
+        date = new Timestamp(new java.util.Date().getTime() + 5 * 60 * 1000);
+    }
+
+    public Code(String phone, String code, Timestamp date) {
+        this.phone = phone;
+        this.code = code;
+        this.date = date;
     }
 
     public String getPhone() {
@@ -34,11 +43,11 @@ public class Code {
         this.code = code;
     }
 
-    public Date getDate() {
+    public Timestamp getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(Timestamp date) {
         this.date = date;
     }
 }

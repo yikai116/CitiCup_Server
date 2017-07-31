@@ -27,7 +27,7 @@
     </column>
     <column id="15" parent="11" name="date">
       <Position>3</Position>
-      <DataType>date|0</DataType>
+      <DataType>datetime|0</DataType>
     </column>
     <index id="16" parent="11" name="phone">
       <ColNames>phone</ColNames>
