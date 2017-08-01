@@ -37,13 +37,13 @@ public class SignController {
         try {
             User user = userMapper.findByPhone(param.getPhone());
             if (user == null){
-                return new Response(new Status(0,"没有该用户"));
+                return new Response(new Status(ResponseHelper.NO_USER,"该手机号未注册"));
             }
             if (!user.getPsw().equals(param.getPsw())){
-                return new Response(new Status(0,"密码错误"));
+                return new Response(new Status(ResponseHelper.PSW_ERROR,"密码错误"));
             }
             userMapper.updateToken(param.getPhone(),param.getToken());
-            return new Response(new Status(1,"登录成功"));
+            return new Response(new Status(ResponseHelper.SUCCESS,"登录成功"));
         }
         catch (Exception e){
             e.printStackTrace();
@@ -62,14 +62,14 @@ public class SignController {
             Code code = codeMapper.findByPhone(param.getPhone());
             if (code == null || code.getCode() == null
                     || !code.getCode().equals(param.getVerCode())){
-                return new Response(new Status(0,"验证信息错误，请重试"));
+                return new Response(new Status(ResponseHelper.VERCODE_ERROR,"验证信息错误，请重试"));
             }
             if (Helper.isExpired(code.getDate())){
-                return new Response(new Status(0,"验证信息过期，请重试"));
+                return new Response(new Status(ResponseHelper.VERCODE_ERROR,"验证信息过期，请重新获取"));
             }
             User user = userMapper.findByPhone(param.getPhone());
             if (user!= null){
-                return new Response(new Status(0,"该手机号已被注册"));
+                return new Response(new Status(ResponseHelper.USER_REGISTERED,"该手机号已被注册"));
             }
             user = new User();
             user.setPhone(param.getPhone());
@@ -77,7 +77,7 @@ public class SignController {
             user.setPsw(param.getPsw());
             user.setToken(param.getToken());
             userMapper.insert(user);
-            return new Response(new Status(1,"注册成功"));
+            return new Response(new Status(ResponseHelper.SUCCESS,"注册成功"));
         }
         catch (Exception e){
             e.printStackTrace();
@@ -91,18 +91,18 @@ public class SignController {
             Code code = codeMapper.findByPhone(param.getPhone());
             if (code == null || code.getCode() == null
                     || !code.getCode().equals(param.getVerCode())){
-                return new Response(new Status(0,"验证信息错误，请重试"));
+                return new Response(new Status(ResponseHelper.VERCODE_ERROR,"验证信息错误，请重试"));
             }
             if (Helper.isExpired(code.getDate())){
-                return new Response(new Status(0,"验证信息过期，请重试"));
+                return new Response(new Status(ResponseHelper.VERCODE_ERROR,"验证信息过期，请重试"));
             }
             User user = userMapper.findByPhone(param.getPhone());
             if (user == null){
-                return new Response(new Status(0,"该手机号未注册"));
+                return new Response(new Status(ResponseHelper.NO_USER,"该手机号未注册"));
             }
             user.setPsw(param.getPsw());
             userMapper.updatePsw(param.getPhone(),param.getPsw());
-            return new Response(new Status(1,"修改成功"));
+            return new Response(new Status(ResponseHelper.SUCCESS,"修改成功"));
         }
         catch (Exception e){
             e.printStackTrace();
@@ -115,9 +115,9 @@ public class SignController {
         try {
             User user = userMapper.findByPhone(phone);
             if (user != null){
-                return new Response(new Status(0,"该手机号已注册"));
+                return new Response(new Status(ResponseHelper.USER_REGISTERED,"该手机号已注册"));
             }
-            return new Response<Code>(new Status(1,"获取成功"),getCode(phone));
+            return new Response<String>(new Status(ResponseHelper.SUCCESS,"获取成功"),getCode(phone).getCode());
         }
         catch (Exception e){
             e.printStackTrace();
@@ -130,9 +130,9 @@ public class SignController {
         try {
             User user = userMapper.findByPhone(phone);
             if (user == null){
-                return new Response(new Status(0,"该手机号未注册"));
+                return new Response(new Status(ResponseHelper.NO_USER,"该手机号未注册"));
             }
-            return new Response<Code>(new Status(1,"获取成功"),getCode(phone));
+            return new Response<String>(new Status(ResponseHelper.SUCCESS,"获取成功"),getCode(phone).getCode());
         }
         catch (Exception e){
             e.printStackTrace();

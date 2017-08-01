@@ -1,7 +1,7 @@
 <component name="ArtifactManager">
-  <artifact type="exploded-war" name="CitiCup:Web exploded">
-    <output-path>$PROJECT_DIR$/out/artifacts/CitiCup_Web_exploded</output-path>
-    <root id="root">
+  <artifact type="war" name="CitiCup">
+    <output-path>$PROJECT_DIR$/out/artifacts/CitiCup</output-path>
+    <root id="archive" name="CitiCup.war">
       <element id="javaee-facet-resources" facet="CitiCup/web/Web" />
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
