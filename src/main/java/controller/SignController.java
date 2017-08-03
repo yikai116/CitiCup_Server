@@ -140,6 +140,21 @@ public class SignController {
         }
     }
 
+    @RequestMapping(value = "verToken", method = RequestMethod.POST)
+    public Response verToken(String token){
+        try {
+            User user = userMapper.findByToken(token);
+            if (user == null){
+                return new Response(new Status(0,"验证码过期，请重新登录"));
+            }
+            return new Response<String>(new Status(ResponseHelper.SUCCESS,"获取成功"));
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return ResponseHelper.SYSTEM_ERROR;
+        }
+    }
+
     private Code getCode(String phone){
         Code oldCode = codeMapper.findByPhone(phone);
         Code newCode = new Code(phone);

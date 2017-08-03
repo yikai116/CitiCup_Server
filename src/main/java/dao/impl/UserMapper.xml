@@ -22,4 +22,9 @@
         SET psw = #{1}
         WHERE phone = #{0}
     </update>
+    <select id="findByToken" parameterType="String" resultType="User">
+        SELECT *
+        FROM User
+        WHERE token = #{0}
+    </select>
 </mapper>
