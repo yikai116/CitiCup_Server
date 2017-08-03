@@ -250,3 +250,39 @@ public static final int SUCCESS = 1;
 public static final int NO_USER = -2;
 ```
 
+**1.6 获取找回密码验证码**
+
+API：
+
+```
+POST	http://localhost:8080/CitiCup/api/verToken
+```
+
+传入数据示例：
+
+```json
+{
+    "token":"123"
+}
+```
+
+注：psw为加密之后的字符串，token是手机唯一标识码
+
+返回数据示例：
+
+```json
+{
+    "status": {
+        "code": 0,
+        "msg": "验证码过期，请重新登录"
+    },
+    "data": null
+}
+```
+
+code可能值：
+
+```json
+1:未过期		0:过期
+```
+
