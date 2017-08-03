@@ -85,6 +85,11 @@ public class SignController {
         }
     }
 
+    /**
+     * 找回密码
+     * @param param 用户参数
+     * @return 返回信息
+     */
     @RequestMapping(value = "/findPsw", method = RequestMethod.POST)
     public Response findPsw(@RequestBody FindPswParam param){
         try {
@@ -110,6 +115,11 @@ public class SignController {
         }
     }
 
+    /**
+     * 得到注册验证码
+     * @param phone 用户手机号
+     * @return 返回信息
+     */
     @RequestMapping(value = "getSignUpVerCode", method = RequestMethod.POST)
     public Response getSignUpVerCode(String phone){
         try {
@@ -125,6 +135,11 @@ public class SignController {
         }
     }
 
+    /**
+     * 得到找回密码验证码
+     * @param phone 用户手机号
+     * @return 返回信息
+     */
     @RequestMapping(value = "getFindPswVerCode", method = RequestMethod.POST)
     public Response getFindPswVerCode(String phone){
         try {
@@ -140,6 +155,11 @@ public class SignController {
         }
     }
 
+    /**
+     * 验证token
+     * @param token token
+     * @return 验证结果
+     */
     @RequestMapping(value = "verToken", method = RequestMethod.POST)
     public Response verToken(String token){
         try {
@@ -155,6 +175,11 @@ public class SignController {
         }
     }
 
+    /**
+     * 辅助得到验证码
+     * @param phone 手机号
+     * @return 验证码
+     */
     private Code getCode(String phone){
         Code oldCode = codeMapper.findByPhone(phone);
         Code newCode = new Code(phone);
