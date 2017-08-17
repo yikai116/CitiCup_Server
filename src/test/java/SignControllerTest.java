@@ -1,5 +1,7 @@
 import dao.CodeMapper;
+import dao.UserMapper;
 import entity.Code;
+import entity.User;
 import org.junit.Test;
 import org.junit.Before; 
 import org.junit.After;
@@ -23,6 +25,8 @@ import java.util.Random;
 @ContextConfiguration({"classpath*:spring-mybaits.xml"})
 public class SignControllerTest { 
 
+    @Autowired
+    UserMapper userMapper;
 @Before
 public void before() throws Exception { 
 } 
@@ -47,8 +51,13 @@ public void testSignIn() throws Exception {
 * 
 */ 
 @Test
-public void testSignUp() throws Exception { 
-//TODO: Test goes here... 
+public void testSignUp() throws Exception {
+    User user = new User();
+    user.setPhone("15196643449");
+    user.setName("用户3449");
+    user.setPsw("123456");
+    user.setToken("123456");
+    userMapper.insert(user);
 } 
 
 /** 

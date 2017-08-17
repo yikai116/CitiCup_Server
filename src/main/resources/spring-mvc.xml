@@ -12,4 +12,9 @@
     <mvc:annotation-driven />
     <context:component-scan base-package="controller" />
     <mvc:default-servlet-handler/>
+
+    <bean name="multipartResolver"
+          class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="defaultEncoding" value="UTF-8"/>
+    </bean>
 </beans>

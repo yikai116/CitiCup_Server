@@ -42,6 +42,10 @@ public class SignController {
             if (!user.getPsw().equals(param.getPsw())){
                 return new Response(new Status(ResponseHelper.PSW_ERROR,"密码错误"));
             }
+            User tokenUser = userMapper.findByToken(param.getToken());
+            if (tokenUser != null){
+                userMapper.updateToken(tokenUser.getPhone(),null);
+            }
             userMapper.updateToken(param.getPhone(),param.getToken());
             return new Response(new Status(ResponseHelper.SUCCESS,"登录成功"));
         }
@@ -70,6 +74,10 @@ public class SignController {
             User user = userMapper.findByPhone(param.getPhone());
             if (user!= null){
                 return new Response(new Status(ResponseHelper.USER_REGISTERED,"该手机号已被注册"));
+            }
+            User tokenUser = userMapper.findByToken(param.getToken());
+            if (tokenUser != null){
+                userMapper.updateToken(tokenUser.getPhone(),null);
             }
             user = new User();
             user.setPhone(param.getPhone());
