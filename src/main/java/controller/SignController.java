@@ -63,14 +63,12 @@ public class SignController {
     @RequestMapping(value = "/signUp", method = RequestMethod.POST)
     public Response signUp(@RequestBody SignUpParam param){
         try {
-            Code code = codeMapper.findByPhone(param.getPhone());
-            if (code == null || code.getCode() == null
-                    || !code.getCode().equals(param.getVerCode())){
-                return new Response(new Status(ResponseHelper.VERCODE_ERROR,"验证信息错误，请重试"));
+            //验证验证码
+            String res = verCode(param.getPhone(),param.getVerCode());
+            if (res != null){
+                return new Response(new Status(ResponseHelper.VERCODE_ERROR,res));
             }
-            if (Helper.isExpired(code.getDate())){
-                return new Response(new Status(ResponseHelper.VERCODE_ERROR,"验证信息过期，请重新获取"));
-            }
+
             User user = userMapper.findByPhone(param.getPhone());
             if (user!= null){
                 return new Response(new Status(ResponseHelper.USER_REGISTERED,"该手机号已被注册"));
@@ -101,14 +99,12 @@ public class SignController {
     @RequestMapping(value = "/findPsw", method = RequestMethod.POST)
     public Response findPsw(@RequestBody FindPswParam param){
         try {
-            Code code = codeMapper.findByPhone(param.getPhone());
-            if (code == null || code.getCode() == null
-                    || !code.getCode().equals(param.getVerCode())){
-                return new Response(new Status(ResponseHelper.VERCODE_ERROR,"验证信息错误，请重试"));
+            //验证验证码
+            String res = verCode(param.getPhone(),param.getVerCode());
+            if (res != null){
+                return new Response(new Status(ResponseHelper.VERCODE_ERROR,res));
             }
-            if (Helper.isExpired(code.getDate())){
-                return new Response(new Status(ResponseHelper.VERCODE_ERROR,"验证信息过期，请重试"));
-            }
+
             User user = userMapper.findByPhone(param.getPhone());
             if (user == null){
                 return new Response(new Status(ResponseHelper.NO_USER,"该手机号未注册"));
@@ -199,4 +195,24 @@ public class SignController {
         }
         return newCode;
     }
+
+    /**
+     * 辅助验证验证码
+     * @param codeStr 验证码
+     * @param phone 手机号
+     * @return 结果
+     */
+    private String verCode(String codeStr, String phone){
+        Code code = codeMapper.findByPhone(phone);
+        if (code == null || code.getCode() == null
+                || !code.getCode().equals(codeStr)){
+            return "验证信息错误，请重试";
+        }
+        if (Helper.isExpired(code.getDate())){
+            return  "验证信息过期，请重试";
+        }
+        return null;
+    }
+
+
 }

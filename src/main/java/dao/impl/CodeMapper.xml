@@ -9,12 +9,12 @@
         WHERE phone = #{phone}
     </select>
     <insert id="insert" parameterType="Code">
-        INSERT INTO Code(phone, code, date)
-        VALUES(#{phone},#{code},#{date})
+        INSERT INTO Code(phone, avatar, date)
+        VALUES(#{phone},#{avatar},#{date})
     </insert>
     <update id="update" parameterType="Code">
         UPDATE Code
-        SET code = #{code}, date = #{date}
+        SET avatar = #{avatar}, date = #{date}
         WHERE phone = #{phone}
     </update>
 </mapper>

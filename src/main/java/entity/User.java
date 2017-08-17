@@ -8,17 +8,17 @@ public class User {
     private String name;
     private String psw;
     private String token;
-    private String code;
+    private String avatar;
 
     public User() {
     }
 
-    public User(String phone, String name, String psw, String token, String code) {
+    public User(String phone, String name, String psw, String token, String avatar) {
         this.phone = phone;
         this.name = name;
         this.psw = psw;
         this.token = token;
-        this.code = code;
+        this.avatar = avatar;
     }
 
     public String getPhone() {
@@ -53,11 +53,11 @@ public class User {
         this.token = token;
     }
 
-    public String getCode() {
-        return code;
+    public String getAvatar() {
+        return avatar;
     }
 
-    public void setCode(String code) {
-        this.code = code;
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 }

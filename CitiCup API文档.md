@@ -5,7 +5,7 @@
 ```json
 {
     "status": {
-        "code": 0,
+        "avatar": 0,
         "msg": "系统错误"
     },
     "data": null
@@ -42,7 +42,7 @@ POST	http://localhost:8080/CitiCup/api/signUp
 ```json
 {
     "status": {
-        "code": 1,
+        "avatar": 1,
         "msg": "注册成功"
     },
     "data": null
@@ -89,7 +89,7 @@ POST	http://localhost:8080/CitiCup/api/getSignUpVerCode
 ```json
 {
     "status": {
-        "code": 1,
+        "avatar": 1,
         "msg": "获取成功"
     },
     "data": "57c4"
@@ -134,7 +134,7 @@ POST	http://localhost:8080/CitiCup/api/signIn
 ```json
 {
     "status": {
-        "code": 1,
+        "avatar": 1,
         "msg": "登录成功"
     },
     "data": null
@@ -183,7 +183,7 @@ POST	http://localhost:8080/CitiCup/api/findPsw
 ```json
 {
     "status": {
-        "code": 1,
+        "avatar": 1,
         "msg": "修改成功"
     },
     "data": null
@@ -230,7 +230,7 @@ POST	http://localhost:8080/CitiCup/api/getFindPswVerCode
 ```json
 {
     "status": {
-        "code": 1,
+        "avatar": 1,
         "msg": "获取成功"
     },
     "data": "57c4"
@@ -273,7 +273,7 @@ POST	http://localhost:8080/CitiCup/api/verToken
 ```json
 {
     "status": {
-        "code": 0,
+        "avatar": 0,
         "msg": "验证码过期，请重新登录"
     },
     "data": null

@@ -15,7 +15,7 @@ CREATE TABLE User
 CREATE TABLE Code
 (
   phone VARCHAR(11) NOT NULL UNIQUE ,
-  code VARCHAR(4),
+  avatar VARCHAR(4),
   date DATETIME,
   PRIMARY KEY (phone)
 )
