@@ -10,5 +10,6 @@ public interface UserMapper {
     void insert(User user);
     void updateToken(String phone,String token);
     void updatePsw(String phone,String psw);
+    void updateAvatar(String phone,String avatar);
     User findByToken(String token);
 }

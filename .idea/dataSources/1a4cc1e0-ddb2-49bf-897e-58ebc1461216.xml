@@ -66,24 +66,32 @@
       <DataType>varchar(50)|0</DataType>
       <DefaultExpression>&apos;default.jpg&apos;</DefaultExpression>
     </column>
-    <index id="24" parent="12" name="phone">
+    <column id="24" parent="12" name="age">
+      <Position>6</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="25" parent="12" name="income">
+      <Position>7</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <index id="26" parent="12" name="phone">
       <ColNames>phone</ColNames>
       <Unique>1</Unique>
     </index>
-    <index id="25" parent="12" name="token">
+    <index id="27" parent="12" name="token">
       <ColNames>token</ColNames>
       <Unique>1</Unique>
     </index>
-    <key id="26" parent="12" name="PRIMARY">
+    <key id="28" parent="12" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>phone</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="27" parent="12" name="phone">
+    <key id="29" parent="12" name="phone">
       <ColNames>phone</ColNames>
       <UnderlyingIndexName>phone</UnderlyingIndexName>
     </key>
-    <key id="28" parent="12" name="token">
+    <key id="30" parent="12" name="token">
       <ColNames>token</ColNames>
       <UnderlyingIndexName>token</UnderlyingIndexName>
     </key>

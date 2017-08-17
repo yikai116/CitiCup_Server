@@ -9,8 +9,8 @@
         WHERE phone = #{0}
     </select>
     <insert id="insert" parameterType="User">
-        INSERT INTO User(phone, name, psw, token)
-        VALUES (#{phone},#{name},#{psw},#{token})
+        INSERT INTO User(phone, name, psw, token, avatar, age, income)
+        VALUES (#{phone},#{name},#{psw},#{token},#{avatar},#{age},#{income})
     </insert>
     <update id="updateToken" parameterType="String">
         UPDATE User
@@ -20,6 +20,11 @@
     <update id="updatePsw" parameterType="String">
         UPDATE User
         SET psw = #{1}
+        WHERE phone = #{0}
+    </update>
+    <update id="updateAvatar" parameterType="String">
+        UPDATE User
+        SET avatar = #{1}
         WHERE phone = #{0}
     </update>
     <select id="findByToken" parameterType="String" resultType="User">

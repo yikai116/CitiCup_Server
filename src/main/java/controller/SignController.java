@@ -7,10 +7,10 @@ import dto.SignInParam;
 import dto.SignUpParam;
 import dto.response.Response;
 import dto.response.Status;
+import dto.response.UserInfo;
 import entity.Code;
 import entity.User;
 import helper.Helper;
-import helper.ResponseHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -37,21 +37,21 @@ public class SignController {
         try {
             User user = userMapper.findByPhone(param.getPhone());
             if (user == null){
-                return new Response(new Status(ResponseHelper.NO_USER,"该手机号未注册"));
+                return Response.NO_USER;
             }
             if (!user.getPsw().equals(param.getPsw())){
-                return new Response(new Status(ResponseHelper.PSW_ERROR,"密码错误"));
+                return Response.PSW_ERROR;
             }
             User tokenUser = userMapper.findByToken(param.getToken());
             if (tokenUser != null){
                 userMapper.updateToken(tokenUser.getPhone(),null);
             }
             userMapper.updateToken(param.getPhone(),param.getToken());
-            return new Response(new Status(ResponseHelper.SUCCESS,"登录成功"));
+            return new Response<UserInfo>().SUCCESS(user.toUserInfo());
         }
         catch (Exception e){
             e.printStackTrace();
-            return ResponseHelper.SYSTEM_ERROR;
+            return Response.SYSTEM_ERROR;
         }
     }
 
@@ -64,14 +64,15 @@ public class SignController {
     public Response signUp(@RequestBody SignUpParam param){
         try {
             //验证验证码
-            String res = verCode(param.getPhone(),param.getVerCode());
-            if (res != null){
-                return new Response(new Status(ResponseHelper.VERCODE_ERROR,res));
+            Code code = codeMapper.findByPhone(param.getPhone());
+            if (code == null || code.getCode() == null
+                    || !code.getCode().equals(param.getVerCode())){
+                return Response.VERCODE_ERROR;
             }
 
             User user = userMapper.findByPhone(param.getPhone());
             if (user!= null){
-                return new Response(new Status(ResponseHelper.USER_REGISTERED,"该手机号已被注册"));
+                return Response.USER_REGISTERED;
             }
             User tokenUser = userMapper.findByToken(param.getToken());
             if (tokenUser != null){
@@ -83,11 +84,11 @@ public class SignController {
             user.setPsw(param.getPsw());
             user.setToken(param.getToken());
             userMapper.insert(user);
-            return new Response(new Status(ResponseHelper.SUCCESS,"注册成功"));
+            return new Response<UserInfo>().SUCCESS(user.toUserInfo());
         }
         catch (Exception e){
             e.printStackTrace();
-            return ResponseHelper.SYSTEM_ERROR;
+            return Response.SYSTEM_ERROR;
         }
     }
 
@@ -100,22 +101,23 @@ public class SignController {
     public Response findPsw(@RequestBody FindPswParam param){
         try {
             //验证验证码
-            String res = verCode(param.getPhone(),param.getVerCode());
-            if (res != null){
-                return new Response(new Status(ResponseHelper.VERCODE_ERROR,res));
+            Code code = codeMapper.findByPhone(param.getPhone());
+            if (code == null || code.getCode() == null
+                    || !code.getCode().equals(param.getVerCode())){
+                return Response.VERCODE_ERROR;
             }
 
             User user = userMapper.findByPhone(param.getPhone());
             if (user == null){
-                return new Response(new Status(ResponseHelper.NO_USER,"该手机号未注册"));
+                return Response.NO_USER;
             }
             user.setPsw(param.getPsw());
             userMapper.updatePsw(param.getPhone(),param.getPsw());
-            return new Response(new Status(ResponseHelper.SUCCESS,"修改成功"));
+            return Response.SUCCESS;
         }
         catch (Exception e){
             e.printStackTrace();
-            return ResponseHelper.SYSTEM_ERROR;
+            return Response.SYSTEM_ERROR;
         }
     }
 
@@ -129,13 +131,13 @@ public class SignController {
         try {
             User user = userMapper.findByPhone(phone);
             if (user != null){
-                return new Response(new Status(ResponseHelper.USER_REGISTERED,"该手机号已注册"));
+                return Response.USER_REGISTERED;
             }
-            return new Response<String>(new Status(ResponseHelper.SUCCESS,"获取成功"),getCode(phone).getCode());
+            return new Response<String>().SUCCESS(getCode(phone).getCode());
         }
         catch (Exception e){
             e.printStackTrace();
-            return ResponseHelper.SYSTEM_ERROR;
+            return Response.SYSTEM_ERROR;
         }
     }
 
@@ -149,13 +151,13 @@ public class SignController {
         try {
             User user = userMapper.findByPhone(phone);
             if (user == null){
-                return new Response(new Status(ResponseHelper.NO_USER,"该手机号未注册"));
+                return Response.NO_USER;
             }
-            return new Response<String>(new Status(ResponseHelper.SUCCESS,"获取成功"),getCode(phone).getCode());
+            return new Response<String>().SUCCESS(getCode(phone).getCode());
         }
         catch (Exception e){
             e.printStackTrace();
-            return ResponseHelper.SYSTEM_ERROR;
+            return Response.SYSTEM_ERROR;
         }
     }
 
@@ -169,13 +171,13 @@ public class SignController {
         try {
             User user = userMapper.findByToken(token);
             if (user == null){
-                return new Response(new Status(0,"验证码过期，请重新登录"));
+                return Response.INVALIED_TOKEN_ERROR;
             }
-            return new Response<String>(new Status(ResponseHelper.SUCCESS,"获取成功"));
+            return Response.SUCCESS;
         }
         catch (Exception e){
             e.printStackTrace();
-            return ResponseHelper.SYSTEM_ERROR;
+            return Response.SYSTEM_ERROR;
         }
     }
 
@@ -195,24 +197,5 @@ public class SignController {
         }
         return newCode;
     }
-
-    /**
-     * 辅助验证验证码
-     * @param codeStr 验证码
-     * @param phone 手机号
-     * @return 结果
-     */
-    private String verCode(String codeStr, String phone){
-        Code code = codeMapper.findByPhone(phone);
-        if (code == null || code.getCode() == null
-                || !code.getCode().equals(codeStr)){
-            return "验证信息错误，请重试";
-        }
-        if (Helper.isExpired(code.getDate())){
-            return  "验证信息过期，请重试";
-        }
-        return null;
-    }
-
 
 }

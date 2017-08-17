@@ -1,10 +1,7 @@
 package controller;
 
 import dao.UserMapper;
-import dto.SignInParam;
 import dto.response.Response;
-import dto.response.Status;
-import helper.ResponseHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -40,7 +37,7 @@ public class SettingController {
                 String extensionName = fileName
                         .substring(fileName.lastIndexOf(".") + 1);
                 // 新的图片文件名 = 获取时间戳+"."图片扩展名
-                String newFileName = String.valueOf(System.currentTimeMillis())
+                String newFileName = String.valueOf(request.getAttribute("phone"))
                         + "." + extensionName;
                 File file = new File(request.getSession().getServletContext().getRealPath("/avatar"),newFileName);
                 System.out.println(file.getAbsolutePath());
@@ -49,15 +46,17 @@ public class SettingController {
                 }
                 System.out.println(file.getPath());
                 avatar.transferTo(file);
-                return new Response<String>(new Status(ResponseHelper.SUCCESS,"上传成功"),"http://104.236.132.15:8081/CitiCup/avatar" + newFileName);
+                String url = "http://104.236.132.15:8081/CitiCup/avatar" + newFileName;
+                userMapper.updateAvatar(String.valueOf(request.getAttribute("phone")),url);
+                return new Response<String>().SUCCESS(url);
             }
             else {
-                return new Response(new Status(ResponseHelper.ERROR,"文件格式不对"));
+                return Response.NO_FILE;
             }
         }
         catch (IOException e){
             e.printStackTrace();
-            return new Response(new Status(ResponseHelper.ERROR,"上传失败"));
+            return Response.UPLOAD_FAIL;
         }
     }
 }
