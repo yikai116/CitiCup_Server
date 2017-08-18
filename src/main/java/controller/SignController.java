@@ -173,7 +173,7 @@ public class SignController {
             if (user == null){
                 return Response.INVALIED_TOKEN_ERROR;
             }
-            return Response.SUCCESS;
+            return new Response<UserInfo>().SUCCESS(user.toUserInfo());
         }
         catch (Exception e){
             e.printStackTrace();
