@@ -64,7 +64,7 @@
     <column id="23" parent="12" name="avatar">
       <Position>5</Position>
       <DataType>varchar(100)|0</DataType>
-      <DefaultExpression>&apos;http://104.236.132.15:8081/CitiCup/avatar/default.jpg&apos;</DefaultExpression>
+      <DefaultExpression>&apos;http://104.236.132.15:8081/CitiCup/avatar/default.png&apos;</DefaultExpression>
     </column>
     <column id="24" parent="12" name="age">
       <Position>6</Position>

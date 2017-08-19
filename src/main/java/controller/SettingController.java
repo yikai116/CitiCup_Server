@@ -46,7 +46,7 @@ public class SettingController {
                 }
                 System.out.println(file.getPath());
                 avatar.transferTo(file);
-                String url = "http://104.236.132.15:8081/CitiCup/avatar" + newFileName;
+                String url = "http://104.236.132.15:8081/CitiCup/avatar/" + newFileName;
                 userMapper.updateAvatar(String.valueOf(request.getAttribute("phone")),url);
                 return new Response<String>().SUCCESS(url);
             }
