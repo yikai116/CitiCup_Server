@@ -5,16 +5,16 @@
 <mapper namespace="dao.CodeMapper">
     <select id="findByPhone" parameterType="String" resultType="Code">
         SELECT *
-        FROM Code
+        FROM ver_code
         WHERE phone = #{phone}
     </select>
     <insert id="insert" parameterType="Code">
-        INSERT INTO Code(phone, avatar, date)
-        VALUES(#{phone},#{avatar},#{date})
+        INSERT INTO ver_code(phone, code, date)
+        VALUES(#{phone},#{code},#{date})
     </insert>
     <update id="update" parameterType="Code">
-        UPDATE Code
-        SET avatar = #{avatar}, date = #{date}
+        UPDATE ver_code
+        SET code = #{code}, date = #{date}
         WHERE phone = #{phone}
     </update>
 </mapper>
