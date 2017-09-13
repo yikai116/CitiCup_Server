@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.RiskAbilityMapper">
+    <insert id="insert" parameterType="RiskAbility">
+        INSERT INTO risk_ability(phone, score)
+        VALUE (#{phone},#{score})
+    </insert>
+
+    <update id="update" parameterType="RiskAbility">
+        UPDATE risk_ability
+        SET score = #{score}
+        WHERE phone = #{phone}
+    </update>
+
+    <select id="get" parameterType="String" resultType="RiskAbility">
+        SELECT *
+        FROM risk_ability
+        WHERE phone = #{phone}
+    </select>
+</mapper>
