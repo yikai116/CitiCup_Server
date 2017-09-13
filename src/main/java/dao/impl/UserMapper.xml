@@ -5,31 +5,31 @@
 <mapper namespace="dao.UserMapper">
     <select id="findByPhone" parameterType="String" resultType="User">
         SELECT *
-        FROM User
+        FROM user
         WHERE phone = #{0}
     </select>
     <insert id="insert" parameterType="User">
-        INSERT INTO User(phone, name, psw, token, avatar, age, income)
-        VALUES (#{phone},#{name},#{psw},#{token},#{avatar},#{age},#{income})
+        INSERT INTO user(phone, name, psw, token, avatar)
+        VALUES (#{phone},#{name},#{psw},#{token},#{avatar})
     </insert>
     <update id="updateToken" parameterType="String">
-        UPDATE User
+        UPDATE user
         SET token = #{1}
         WHERE phone = #{0}
     </update>
     <update id="updatePsw" parameterType="String">
-        UPDATE User
+        UPDATE user
         SET psw = #{1}
         WHERE phone = #{0}
     </update>
     <update id="updateAvatar" parameterType="String">
-        UPDATE User
+        UPDATE user
         SET avatar = #{1}
         WHERE phone = #{0}
     </update>
     <select id="findByToken" parameterType="String" resultType="User">
         SELECT *
-        FROM User
+        FROM user
         WHERE token = #{0}
     </select>
 </mapper>
