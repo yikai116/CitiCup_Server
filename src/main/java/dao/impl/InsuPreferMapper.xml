@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.InsuPreferMapper">
+    <insert id="insert" parameterType="InsuPrefer">
+        INSERT INTO insu_prefer(phone, insu_type,theme,pay_method)
+        VALUE (#{phone},#{insuType},#{theme},#{payMethod})
+    </insert>
+
+    <update id="update" parameterType="InsuPrefer">
+        UPDATE insu_prefer
+        SET insu_type = #{insuType},theme = #{theme},pay_method = #{payMethod}
+        WHERE phone = #{phone}
+    </update>
+
+    <select id="get" parameterType="String" resultType="InsuPrefer">
+        SELECT *
+        FROM insu_prefer
+        WHERE phone = #{phone}
+    </select>
+</mapper>
