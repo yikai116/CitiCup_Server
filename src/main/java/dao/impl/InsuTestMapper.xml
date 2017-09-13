@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.InsuTestMapper">
+        <insert id="insert" parameterType="InsuTest">
+            INSERT INTO insu_test(phone, keyword)
+            VALUE (#{phone},#{keyword})
+        </insert>
+
+        <update id="update" parameterType="InsuTest">
+            UPDATE insu_test
+            SET keyword = #{keyword}
+            WHERE phone = #{phone}
+        </update>
+
+        <select id="get" parameterType="String" resultType="InsuTest">
+            SELECT *
+            FROM insu_test
+            WHERE phone = #{phone}
+        </select>
+</mapper>
