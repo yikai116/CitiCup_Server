@@ -11,8 +11,6 @@ public class User {
     private String psw;
     private String token;
     private String avatar;
-    private int age;
-    private int income;
 
     public User() {
     }
@@ -65,29 +63,4 @@ public class User {
         this.avatar = avatar;
     }
 
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-    public int getIncome() {
-        return income;
-    }
-
-    public void setIncome(int income) {
-        this.income = income;
-    }
-
-    public UserInfo toUserInfo(){
-        UserInfo info = new UserInfo();
-        info.setPhone(getPhone());
-        info.setName(getName());
-        info.setAvatar(getAvatar());
-        info.setAge(getAge());
-        info.setIncome(getIncome());
-        return info;
-    }
 }
