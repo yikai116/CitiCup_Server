@@ -7,8 +7,6 @@ public class UserInfo {
     private String phone;
     private String name;
     private String avatar;
-    private int age;
-    private int income;
 
     public String getPhone() {
         return phone;
@@ -32,21 +30,5 @@ public class UserInfo {
 
     public void setAvatar(String avatar) {
         this.avatar = avatar;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-    public int getIncome() {
-        return income;
-    }
-
-    public void setIncome(int income) {
-        this.income = income;
     }
 }

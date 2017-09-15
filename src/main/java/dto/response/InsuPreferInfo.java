@@ -1,46 +1,49 @@
 package dto.response;
 
 import entity.InsuPrefer;
+import org.apache.commons.lang.StringUtils;
+
+import java.util.ArrayList;
 
 /**
  * Created by p on 2017/9/13.
  */
 public class InsuPreferInfo {
 
-    String insuType;
-    String theme;
-    String payMethod;
+    protected ArrayList<String> insuType;
+    protected ArrayList<String> theme;
+    protected ArrayList<String> payMethod;
 
-    public String getInsuType() {
+    public ArrayList<String> getInsuType() {
         return insuType;
     }
 
-    public void setInsuType(String insuType) {
+    public void setInsuType(ArrayList<String> insuType) {
         this.insuType = insuType;
     }
 
-    public String getTheme() {
+    public ArrayList<String> getTheme() {
         return theme;
     }
 
-    public void setTheme(String theme) {
+    public void setTheme(ArrayList<String> theme) {
         this.theme = theme;
     }
 
-    public String getPayMethod() {
+    public ArrayList<String> getPayMethod() {
         return payMethod;
     }
 
-    public void setPayMethod(String payMethod) {
+    public void setPayMethod(ArrayList<String> payMethod) {
         this.payMethod = payMethod;
     }
 
     public InsuPrefer toInsuPrefer(String phone){
         InsuPrefer prefer = new InsuPrefer();
         prefer.setPhone(phone);
-        prefer.setInsuType(insuType);
-        prefer.setTheme(theme);
-        prefer.setPayMethod(payMethod);
+        prefer.setInsuType(StringUtils.join(insuType,","));
+        prefer.setTheme(StringUtils.join(theme,","));
+        prefer.setPayMethod(StringUtils.join(payMethod,","));
         return prefer;
     }
 }

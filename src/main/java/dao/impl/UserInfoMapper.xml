@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.UserInfoMapper">
+    <select id="get" parameterType="String" resultType="UserInfo">
+        SELECT *
+        FROM user_info
+        WHERE phone = #{phone}
+    </select>
+    <insert id="insert" parameterType="UserInfo">
+        INSERT INTO user_info(phone, age, gender, income)
+        VALUES(#{phone},#{age},#{gender},#{income})
+    </insert>
+    <update id="update" parameterType="UserInfo">
+        UPDATE user_info
+        SET age = #{age}, gender = #{gender}, income = #{income}
+        WHERE phone = #{phone}
+    </update>
+</mapper>

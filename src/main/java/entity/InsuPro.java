@@ -8,6 +8,7 @@ public class InsuPro {
     private String name;
     private String company;
     private String type;
+    private String price;
     private String payMethod;
     private String advance;
     private String suitable;
@@ -43,6 +44,14 @@ public class InsuPro {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
     }
 
     public String getPayMethod() {

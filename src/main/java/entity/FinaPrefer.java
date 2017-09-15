@@ -2,6 +2,9 @@ package entity;
 
 import dto.response.FinaPreferInfo;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 /**
  * Created by p on 2017/9/13.
  */
@@ -55,10 +58,10 @@ public class FinaPrefer {
 
     public FinaPreferInfo toFinaPreferInfo() {
         FinaPreferInfo info = new FinaPreferInfo();
-        info.setDuration(duration);
-        info.setProType(proType);
-        info.setLevel(level);
-        info.setRevenue(revenue);
+        info.setDuration(new ArrayList<String>(Arrays.asList(duration.split(","))));
+        info.setProType(new ArrayList<String>(Arrays.asList(proType.split(","))));
+        info.setLevel(new ArrayList<String>(Arrays.asList(level.split(","))));
+        info.setRevenue(new ArrayList<String>(Arrays.asList(revenue.split(","))));
         return info;
     }
 }

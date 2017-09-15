@@ -1,6 +1,8 @@
 import dao.CodeMapper;
+import dao.InsuProMapper;
 import dao.UserMapper;
 import entity.Code;
+import entity.InsuPro;
 import entity.User;
 import org.junit.Test;
 import org.junit.Before; 
@@ -10,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 /** 
@@ -26,7 +29,7 @@ import java.util.Random;
 public class SignControllerTest { 
 
     @Autowired
-    UserMapper userMapper;
+    InsuProMapper insuProMapper;
 @Before
 public void before() throws Exception { 
 } 
@@ -42,8 +45,10 @@ public void after() throws Exception {
 */ 
 @Test
 public void testSignIn() throws Exception { 
-//TODO: Test goes here... 
-} 
+    ArrayList<InsuPro> pros = (ArrayList<InsuPro>) insuProMapper.getPro("老人");
+    System.out.println(pros.size());
+    System.out.println(pros.get(0).getAdvance());
+}
 
 /** 
 * 
@@ -52,12 +57,6 @@ public void testSignIn() throws Exception {
 */ 
 @Test
 public void testSignUp() throws Exception {
-    User user = new User();
-    user.setPhone("15196643449");
-    user.setName("用户3449");
-    user.setPsw("123456");
-    user.setToken("123456");
-    userMapper.insert(user);
 } 
 
 /** 
@@ -76,13 +75,9 @@ public void testFindPsw() throws Exception {
 * 
 */
 
-@Autowired
-private CodeMapper codeMapper;
 @Test
 public void testGetVerCode() throws Exception { 
 //TODO: Test goes here...
-    Code code = codeMapper.findByPhone("15196673448");
-    System.out.println(code.getDate());
 } 
 
 

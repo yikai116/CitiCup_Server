@@ -3,7 +3,7 @@ package entity;
 /**
  * Created by p on 2017/9/14.
  */
-public class FianPro {
+public class FinaPro {
     private int id;
     private String name;
     private String company;

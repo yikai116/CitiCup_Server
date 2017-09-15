@@ -2,6 +2,9 @@ package entity;
 
 import dto.response.InsuPreferInfo;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 /**
  * Created by p on 2017/9/13.
  */
@@ -45,9 +48,9 @@ public class InsuPrefer {
 
     public InsuPreferInfo toInsuPreferInfo() {
         InsuPreferInfo info = new InsuPreferInfo();
-        info.setInsuType(insuType);
-        info.setTheme(theme);
-        info.setPayMethod(payMethod);
+        info.setInsuType(new ArrayList<String>(Arrays.asList(insuType.split(","))));
+        info.setTheme(new ArrayList<String>(Arrays.asList(theme.split(","))));
+        info.setPayMethod(new ArrayList<String>(Arrays.asList(payMethod.split(","))));
         return info;
     }
 

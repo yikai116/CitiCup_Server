@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.InsuProMapper">
+
+    <select id="getPro" parameterType="String" resultType="InsuPro">
+        SELECT *
+        FROM insu_pro
+        WHERE advance LIKE CONCAT(CONCAT('%', #{key}), '%')
+    </select>
+</mapper>
