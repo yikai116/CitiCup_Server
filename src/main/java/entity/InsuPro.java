@@ -13,6 +13,15 @@ public class InsuPro {
     private String advance;
     private String suitable;
     private String term;
+    private String url;
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
 
     public int getId() {
         return id;

@@ -7,6 +7,8 @@
     <file url="file://$PROJECT_DIR$/src/main/java/dao/impl/InsuPreferMapper.xml" dialect="MySQL" />
     <file url="file://$PROJECT_DIR$/src/main/java/dao/impl/InsuProMapper.xml" dialect="MySQL" />
     <file url="file://$PROJECT_DIR$/src/main/java/dao/impl/InsuTestMapper.xml" dialect="MySQL" />
+    <file url="file://$PROJECT_DIR$/src/main/java/dao/impl/PushMapper.xml" dialect="MySQL" />
+    <file url="file://$PROJECT_DIR$/src/main/java/dao/impl/QuestionMapper.xml" dialect="MySQL" />
     <file url="file://$PROJECT_DIR$/src/main/java/dao/impl/RiskAbilityMapper.xml" dialect="MySQL" />
     <file url="file://$PROJECT_DIR$/src/main/java/dao/impl/UserInfoMapper.xml" dialect="MySQL" />
     <file url="file://$PROJECT_DIR$/src/main/java/dao/impl/UserMapper.xml" dialect="MySQL" />

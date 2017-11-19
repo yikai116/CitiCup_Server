@@ -6,13 +6,11 @@ import dto.FindPswParam;
 import dto.SignInParam;
 import dto.SignUpParam;
 import dto.response.Response;
-import dto.response.Status;
 import dto.response.UserInfo;
-import entity.Code;
 import entity.User;
-import helper.Helper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import service.SignService;
 
 /**
  * Created by p on 2017/7/19.
@@ -27,6 +25,8 @@ public class SignController {
     @Autowired
     private CodeMapper codeMapper;
 
+    @Autowired
+    private SignService service;
     /**
      * 登录
      *
@@ -64,34 +64,18 @@ public class SignController {
     @RequestMapping(value = "/signUp", method = RequestMethod.POST)
     public Response signUp(@RequestBody SignUpParam param) {
 
-        //验证验证码
-        Code code = codeMapper.findByPhone(param.getPhone());
-        if (code == null || code.getCode() == null
-                || !code.getCode().equals(param.getVerCode())) {
+        // 验证验证码
+        if (!service.verCode(param.getPhone(),param.getVerCode())){
             return Response.VERCODE_ERROR;
         }
 
+        // 判断token是否已经存在
         User user = userMapper.findByPhone(param.getPhone());
         if (user != null) {
             return Response.USER_REGISTERED;
         }
-        User tokenUser = userMapper.findByToken(param.getToken());
-        if (tokenUser != null) {
-            userMapper.updateToken(tokenUser.getPhone(), null);
-        }
-        user = new User();
-        user.setPhone(param.getPhone());
-        user.setName("用户" + param.getPhone().substring(param.getPhone().length() - 4));
-        user.setPsw(param.getPsw());
-        user.setToken(param.getToken());
-        String url = "http://104.236.132.15:8081/CitiCup/avatar/default.png";
-        user.setAvatar(url);
-        userMapper.insert(user);
-        UserInfo info = new UserInfo();
-        info.setName(user.getName());
-        info.setPhone(user.getPhone());
-        info.setAvatar(user.getAvatar());
-        return new Response<UserInfo>().SUCCESS(info);
+
+        return new Response<UserInfo>().SUCCESS(service.signUp(param));
 
     }
 
@@ -103,10 +87,8 @@ public class SignController {
      */
     @RequestMapping(value = "/findPsw", method = RequestMethod.POST)
     public Response findPsw(@RequestBody FindPswParam param) {
-        //验证验证码
-        Code code = codeMapper.findByPhone(param.getPhone());
-        if (code == null || code.getCode() == null
-                || !code.getCode().equals(param.getVerCode())) {
+        // 验证验证码
+        if (!service.verCode(param.getPhone(),param.getVerCode())){
             return Response.VERCODE_ERROR;
         }
 
@@ -131,7 +113,7 @@ public class SignController {
         if (user != null) {
             return Response.USER_REGISTERED;
         }
-        return new Response<String>().SUCCESS(getCode(phone).getCode());
+        return new Response<String>().SUCCESS(service.getCode(phone).getCode());
     }
 
     /**
@@ -146,7 +128,7 @@ public class SignController {
         if (user == null) {
             return Response.NO_USER;
         }
-        return new Response<String>().SUCCESS(getCode(phone).getCode());
+        return new Response<String>().SUCCESS(service.getCode(phone).getCode());
     }
 
     /**
@@ -166,23 +148,6 @@ public class SignController {
         info.setPhone(user.getPhone());
         info.setAvatar(user.getAvatar());
         return new Response<UserInfo>().SUCCESS(info);
-    }
-
-    /**
-     * 辅助得到验证码
-     *
-     * @param phone 手机号
-     * @return 验证码
-     */
-    private Code getCode(String phone) {
-        Code oldCode = codeMapper.findByPhone(phone);
-        Code newCode = new Code(phone);
-        if (oldCode != null) {
-            codeMapper.update(newCode);
-        } else {
-            codeMapper.insert(newCode);
-        }
-        return newCode;
     }
 
 }

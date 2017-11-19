@@ -1,8 +1,7 @@
 package entity;
 
-import helper.Helper;
-
 import java.sql.Timestamp;
+import java.util.Random;
 
 /**
  * Created by p on 2017/7/31.
@@ -17,7 +16,7 @@ public class Code {
 
     public Code(String phone) {
         this.phone = phone;
-        code = Helper.getVerCode();
+        code = getVerCode();
         date = new Timestamp(new java.util.Date().getTime() + 5 * 60 * 1000);
     }
 
@@ -49,5 +48,22 @@ public class Code {
 
     public void setDate(Timestamp date) {
         this.date = date;
+    }
+
+    /**
+     * 得到四位验证码
+     * @return 验证码
+     */
+    public static String getVerCode() {
+        String base = "abcdefghijklmnopqrstuvwxyz0123456789";
+        Random random = new Random();
+        StringBuffer sb = new StringBuffer();
+        String verCode;
+        for (int i = 0; i < 4; i++) {
+            int number = random.nextInt(base.length());
+            sb.append(base.charAt(number));
+        }
+        verCode = sb.toString();
+        return verCode;
     }
 }

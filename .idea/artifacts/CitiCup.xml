@@ -1,7 +1,7 @@
 <component name="ArtifactManager">
-  <artifact type="war" name="CitiCup">
+  <artifact type="exploded-war" name="CitiCup">
     <output-path>$PROJECT_DIR$/out/artifacts/CitiCup</output-path>
-    <root id="archive" name="CitiCup.war">
+    <root id="root">
       <element id="javaee-facet-resources" facet="CitiCup/web/Web" />
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
@@ -47,6 +47,17 @@
           <element id="library" level="project" name="Maven: com.google.code.gson:gson:2.8.0" />
           <element id="library" level="project" name="Maven: org.apache.directory.studio:org.apache.commons.lang:2.6" />
           <element id="library" level="project" name="Maven: commons-lang:commons-lang:2.6" />
+          <element id="library" level="project" name="json-simple-1.1.1" />
+          <element id="library" level="project" name="Maven: cglib:cglib:3.1" />
+          <element id="library" level="project" name="Maven: org.ow2.asm:asm:4.2" />
+          <element id="library" level="project" name="Maven: org.apache.commons:commons-lang3:3.4" />
+          <element id="library" level="project" name="Maven: com.github.stuxuhai:jpinyin:1.0" />
+          <element id="library" level="project" name="Maven: org.apache.logging.log4j:log4j-core:2.6" />
+          <element id="library" level="project" name="Maven: org.apache.logging.log4j:log4j-api:2.6" />
+          <element id="library" level="project" name="Maven: org.projectlombok:lombok:1.16.12" />
+          <element id="library" level="project" name="Maven: com.google.guava:guava:20.0" />
+          <element id="library" level="project" name="json-simple-1.1.1 (2)" />
+          <element id="library" level="project" name="MiPush_SDK_Server_2_2_18" />
         </element>
       </element>
     </root>

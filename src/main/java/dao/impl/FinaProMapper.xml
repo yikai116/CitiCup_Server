@@ -8,5 +8,7 @@
         SELECT *
         FROM fina_pro
         WHERE (level  &lt;  #{level})
+        ORDER BY RAND()
+        LIMIT 0,8
     </select>
 </mapper>

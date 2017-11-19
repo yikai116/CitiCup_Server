@@ -1,3 +1,4 @@
+import component.WordSimilarity;
 import dao.CodeMapper;
 import dao.InsuProMapper;
 import dao.UserMapper;
@@ -11,6 +12,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import service.SignService;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -25,11 +27,13 @@ import java.util.Random;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration({"classpath*:spring-mybaits.xml"})
+@ContextConfiguration({"classpath*:spring-*.xml"})
 public class SignControllerTest { 
 
     @Autowired
-    InsuProMapper insuProMapper;
+    SignService service;
+    @Autowired
+    WordSimilarity similarity;
 @Before
 public void before() throws Exception { 
 } 
@@ -44,10 +48,8 @@ public void after() throws Exception {
 * 
 */ 
 @Test
-public void testSignIn() throws Exception { 
-    ArrayList<InsuPro> pros = (ArrayList<InsuPro>) insuProMapper.getPro("老人");
-    System.out.println(pros.size());
-    System.out.println(pros.get(0).getAdvance());
+public void testSignIn() throws Exception {
+    similarity.readCiLin();
 }
 
 /** 

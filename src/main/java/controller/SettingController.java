@@ -1,7 +1,9 @@
 package controller;
 
+import dao.PushMapper;
 import dao.UserMapper;
 import dto.response.Response;
+import entity.Push;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -21,6 +23,8 @@ public class SettingController {
     @Autowired
     private UserMapper userMapper;
 
+    @Autowired
+    private PushMapper pushMapper;
     /**
      * 设置头像
      *
@@ -46,11 +50,27 @@ public class SettingController {
             }
             System.out.println(file.getPath());
             avatar.transferTo(file);
-            String url = "http://104.236.132.15:8081/CitiCup/avatar/" + newFileName;
+            String url = "http://104.236.132.15:8080/CitiCup/avatar/" + newFileName;
             userMapper.updateAvatar(String.valueOf(request.getAttribute("phone")), url);
             return new Response<String>().SUCCESS(url);
         } else {
             return Response.NO_FILE;
         }
+    }
+
+    @RequestMapping(value = "/setRegId", method = RequestMethod.POST)
+    public Response setRegId(String regId, HttpServletRequest request){
+        String phone = String.valueOf(request.getAttribute("phone"));
+        Push push = new Push();
+        push.setRegId(regId);
+        push.setPhone(phone);
+        Push temp = pushMapper.get(phone);
+        if (temp == null){
+            pushMapper.insert(push);
+        }
+        else {
+            pushMapper.update(push);
+        }
+        return Response.SUCCESS;
     }
 }

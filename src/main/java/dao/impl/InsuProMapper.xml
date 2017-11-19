@@ -4,9 +4,14 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="dao.InsuProMapper">
 
-    <select id="getPro" parameterType="String" resultType="InsuPro">
+    <select id="getPro" parameterType="java.util.List" resultType="InsuPro">
         SELECT *
         FROM insu_pro
-        WHERE advance LIKE CONCAT(CONCAT('%', #{key}), '%')
+        WHERE
+        <foreach collection="array" item="item" separator="OR" open="(" close=")">
+            name LIKE CONCAT(CONCAT('%', #{item}), '%')
+        </foreach>
+        ORDER BY RAND()
+        LIMIT 0,8
     </select>
 </mapper>

@@ -14,6 +14,15 @@ public class FinaPro {
     private Boolean redeem;
     private Boolean guaranteed;
     private int level;
+    private String url;
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
 
     public int getId() {
         return id;
