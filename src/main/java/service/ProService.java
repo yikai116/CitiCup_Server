@@ -12,4 +12,6 @@ public interface ProService {
     ArrayList<InsuPro> getInsuPro(boolean reget) throws NoSuchFieldException, IllegalAccessException;
 
     ArrayList<FinaPro> getFinaPro(boolean reget);
+
+    InsuPro getInsuProById(String id);
 }

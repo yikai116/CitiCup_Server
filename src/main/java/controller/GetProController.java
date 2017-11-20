@@ -41,4 +41,9 @@ public class GetProController {
 
         return new Response<ArrayList<FinaPro>>().SUCCESS(proService.getFinaPro(reget));
     }
+
+    @RequestMapping(value = "/getInsuProById", method = RequestMethod.POST)
+    public Response getInsuProById(String id){
+        return new Response<InsuPro>().SUCCESS(proService.getInsuProById(id));
+    }
 }

@@ -8,4 +8,5 @@ import entity.Question;
 public interface QuestionMapper {
     Question get(String phone);
     void insert(Question question);
+    void update(Question question);
 }

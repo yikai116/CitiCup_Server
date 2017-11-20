@@ -14,4 +14,15 @@
         ORDER BY RAND()
         LIMIT 0,8
     </select>
+    <select id="getOneRand" resultType="InsuPro">
+        SELECT *
+        FROM insu_pro
+        ORDER BY RAND()
+        LIMIT 0,1
+    </select>
+    <select id="getOneById" parameterType="String" resultType="InsuPro">
+        SELECT *
+        FROM insu_pro
+        WHERE id = #{id}
+    </select>
 </mapper>

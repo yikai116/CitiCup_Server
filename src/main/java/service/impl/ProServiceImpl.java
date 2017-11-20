@@ -71,6 +71,11 @@ public class ProServiceImpl implements ProService {
         return pros;
     }
 
+    @Override
+    public InsuPro getInsuProById(String id) {
+        return insuProMapper.getOneById(id);
+    }
+
 
     private int getLevel(int sco) {
         if (sco < 30)
@@ -138,4 +143,6 @@ public class ProServiceImpl implements ProService {
         System.out.println(key);
         return (String[]) f.get(keyWord);
     }
+
+
 }

@@ -8,7 +8,7 @@
 
     <task:annotation-driven/> <!-- 定时器开关-->
 
-    <bean id="myTask" class="controller.MyTask"/>
+    <bean id="myTask" class="component.MyTask"/>
 
     <task:scheduled-tasks>
         <!-- 每天早上八点 -->
