@@ -1,6 +1,7 @@
 package controller;
 
 import dao.*;
+import dto.QuesAns;
 import dto.response.FinaPreferInfo;
 import dto.response.InsuPreferInfo;
 import dto.response.Response;
@@ -103,52 +104,5 @@ public class TestController {
         similarityService.initInsuTest(keys);
         return;
     }
-
-//    @RequestMapping(value = "/getKeyword", method = RequestMethod.POST)
-//    public Response getKeyword(HttpServletRequest request) {
-//        InsuTest entity = insuTestMapper.get(String.valueOf(request.getAttribute("phone")));
-//
-//        if (entity!=null){
-//            return new Response<String>().SUCCESS(entity.getKeyword());
-//        }
-//        else {
-//            return new Response(new Status(0,"您还没进行保险测试~"));
-//        }
-//    }
-//    @RequestMapping(value = "/getAbility", method = RequestMethod.POST)
-//    public Response getRiskAbility(HttpServletRequest request) {
-//        RiskAbility ability = abilityMapper.get(String.valueOf(request.getAttribute("phone")));
-//
-//        if (ability!=null){
-//            return new Response<Integer>().SUCCESS(ability.getScore());
-//        }
-//        else {
-//            return new Response(new Status(0,"您还没进行风险测试~"));
-//        }
-//    }
-
-//    @RequestMapping(value = "/getInsuPrefer", method = RequestMethod.POST)
-//    public Response getInsuPrefer(HttpServletRequest request) {
-//        InsuPrefer entity = insuPreferMapper.get(String.valueOf(request.getAttribute("phone")));
-//
-//        if (entity!=null){
-//            return new Response<InsuPreferInfo>().SUCCESS(entity.toInsuPreferInfo());
-//        }
-//        else {
-//            return new Response(new Status(0,"您还没进行保险偏好设置~"));
-//        }
-//    }
-
-//    @RequestMapping(value = "/getFinaPrefer", method = RequestMethod.POST)
-//    public Response getFinaPrefer(HttpServletRequest request) {
-//        FinaPrefer entity = finaPreferMapper.get(String.valueOf(request.getAttribute("phone")));
-//
-//        if (entity!=null){
-//            return new Response<FinaPreferInfo>().SUCCESS(entity.toFinaPreferInfo());
-//        }
-//        else {
-//            return new Response(new Status(0,"您还没进行理财偏好设置~"));
-//        }
-//    }
 
 }

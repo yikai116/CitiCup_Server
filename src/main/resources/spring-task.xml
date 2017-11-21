@@ -11,10 +11,10 @@
     <bean id="myTask" class="component.MyTask"/>
 
     <task:scheduled-tasks>
-        <!-- 每天早上八点 -->
-        <task:scheduled ref="myTask" method="pushPro" cron="0 0 8 * * ? "/>
-        <!-- 每周一八点 -->
-        <task:scheduled ref="myTask" method="pushQue" cron="0 0 8 ? * MON "/>
+        <!-- 每天早上八点 0 0 8 * * ? -->
+        <task:scheduled ref="myTask" method="pushPro" cron="0 */3 * * * ? "/>
+        <!-- 每周一八点 0 0 8 ? * MON -->
+        <task:scheduled ref="myTask" method="pushQue" cron="0 */5 * * * ? "/>
     </task:scheduled-tasks>
 
 </beans>

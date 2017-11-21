@@ -1,16 +1,22 @@
 package controller;
 
 import dao.CodeMapper;
+import dao.QuestionMapper;
 import dao.UserMapper;
 import dto.FindPswParam;
+import dto.QuesAns;
 import dto.SignInParam;
 import dto.SignUpParam;
 import dto.response.Response;
 import dto.response.UserInfo;
+import entity.Question;
 import entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import service.SignService;
+
+import java.io.UnsupportedEncodingException;
+import java.lang.reflect.Field;
 
 /**
  * Created by p on 2017/7/19.
@@ -27,6 +33,9 @@ public class SignController {
 
     @Autowired
     private SignService service;
+
+    @Autowired
+    private QuestionMapper questionMapper;
     /**
      * 登录
      *
@@ -150,4 +159,28 @@ public class SignController {
         return new Response<UserInfo>().SUCCESS(info);
     }
 
+    @RequestMapping(value = "/updateQues", method = RequestMethod.POST)
+    public Response updateQues(@RequestParam String key,
+                               @RequestParam String phone,
+                               @RequestParam String value) throws NoSuchFieldException, IllegalAccessException, UnsupportedEncodingException {
+        value = new String(value.getBytes("ISO-8859-1"),"UTF-8");
+        Question question = questionMapper.get(phone);
+//        System.out.println(value + s2);
+        boolean flag = false;
+        if (question == null) {
+            question = new Question();
+            question.setPhone(phone);
+            flag = true;
+        }
+        Class<?> cls = Question.class;
+        Field f = null;
+        f = cls.getDeclaredField(key);
+        f.setAccessible(true);//为 true 则表示反射的对象在使用时取消 Java 语言访问检查
+        f.set(question,value);
+        if (flag)
+            questionMapper.insert(question);
+        else
+            questionMapper.update(question);
+        return Response.SUCCESS;
+    }
 }

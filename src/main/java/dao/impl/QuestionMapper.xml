@@ -9,8 +9,8 @@
         WHERE phone = #{phone}
     </select>
     <insert id="insert" parameterType="Question">
-        INSERT INTO question(disease,safety,car,children,old,transport)
-        VALUE (#{disease},#{safety},#{car},#{children},#{old},#{transport})
+        INSERT INTO question(phone,disease,safety,car,children,old,transport)
+        VALUE (#{phone},#{disease},#{safety},#{car},#{children},#{old},#{transport})
     </insert>
     <insert id="update" parameterType="Question">
         UPDATE question

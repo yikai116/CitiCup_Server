@@ -137,6 +137,8 @@ public class MyTask {
                 .payload(messagePayload)
                 .restrictedPackageName("com.exercise.p.citicup")
                 .notifyType(1)     // 使用默认提示音提示
+                .extra(Constants.EXTRA_PARAM_NOTIFY_EFFECT, Constants.NOTIFY_WEB)
+                .extra(Constants.EXTRA_PARAM_WEB_URI, "http://www.xiaomi.com")
                 .build();
         Result result = sender.send(message, regId, 3);
     }
