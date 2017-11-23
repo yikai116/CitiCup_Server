@@ -79,39 +79,47 @@ public class MyTask {
             }
             Question question = questionMapper.get(push.getPhone());
 
-            int code = 0;
-            switch (max) {
-                case 5:
-                case 7:
-                case 8:
-                    code = 0;
-                    break;
-                case 3:
-                case 9:
-                    code = 1;
-                    break;
-                case 2:
-                    code = 2;
-                    break;
-                case 0:
-                case 1:
-                    code = 3;
-                    break;
-                case 4:
-                case 10:
-                case 11:
-                    code = 4;
-                    break;
-                case 6:
-                    code = 5;
-                    break;
-                default:
-                    code = 0;
-                    break;
-            }
+//            int code = 0;
+//            String key = "";
+//            switch (max) {
+//                case 5:
+//                case 7:
+//                case 8:
+//                    code = 0;
+//                    key = "disease";
+//                    break;
+//                case 3:
+//                case 9:
+//                    code = 1;
+//                    key = "safety";
+//                    break;
+//                case 2:
+//                    code = 2;
+//                    key = "car";
+//                    break;
+//                case 0:
+//                case 1:
+//                    code = 3;
+//                    key = "children";
+//                    break;
+//                case 4:
+//                case 10:
+//                case 11:
+//                    code = 4;
+//                    key = "old";
+//                    break;
+//                case 6:
+//                    code = 5;
+//                    key = "transport";
+//                    break;
+//                default:
+//                    code = 0;
+//                    key = "children";
+//                    break;
+//            }
 
-            if (ifComplete(code,question)) {
-                pushOne(code, push.getRegId());
+            if (ifComplete(max,question)) {
+                pushOne(max, push);
             }
         }
     }
@@ -125,7 +133,7 @@ public class MyTask {
         return f.getFloat(test);
     }
 
-    private void pushOne(int code, String regId) throws IOException, ParseException {
+    private void pushOne(int code, Push user) throws IOException, ParseException {
         Constants.useOfficial();
         Sender sender = new Sender("DCNlcmUReegDMhpXjol8Mg==");
         String messagePayload = "www.baidu.com";
@@ -138,29 +146,18 @@ public class MyTask {
                 .restrictedPackageName("com.exercise.p.citicup")
                 .notifyType(1)     // 使用默认提示音提示
                 .extra(Constants.EXTRA_PARAM_NOTIFY_EFFECT, Constants.NOTIFY_WEB)
-                .extra(Constants.EXTRA_PARAM_WEB_URI, "http://www.xiaomi.com")
+                .extra(Constants.EXTRA_PARAM_WEB_URI, "http://104.236.132.15:8088/#!/"+ keyWord.keys_en[code] + "/" + user.getPhone())
                 .build();
-        Result result = sender.send(message, regId, 3);
+        Result result = sender.send(message, user.getRegId(), 3);
     }
 
-    private boolean ifComplete(int code, Question question) {
+    private boolean ifComplete(int code, Question question) throws NoSuchFieldException, IllegalAccessException {
         if (question == null)
             return true;
-        switch (code) {
-            case 0:
-                return question.getDisease() == null;
-            case 1:
-                return question.getSafety() == null;
-            case 2:
-                return question.getCar() == null;
-            case 3:
-                return question.getChildren() == null;
-            case 4:
-                return question.getOld() == null;
-            case 5:
-                return question.getTransport() == null;
-            default:
-                return false;
-        }
+        Class<?> cls = Question.class;
+        Field f = null;
+        f = cls.getDeclaredField(keyWord.keys_en[code]);
+        f.setAccessible(true);//为 true 则表示反射的对象在使用时取消 Java 语言访问检查
+        return f.get(question) == null;
     }
 }

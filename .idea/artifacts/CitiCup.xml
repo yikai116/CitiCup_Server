@@ -59,6 +59,15 @@
           <element id="library" level="project" name="json-simple-1.1.1 (2)" />
           <element id="library" level="project" name="MiPush_SDK_Server_2_2_18" />
         </element>
+        <element id="directory" name="WEB-INF">
+          <element id="directory" name="lib">
+            <element id="library" level="project" name="Maven: org.jsoup:jsoup:1.8.3" />
+            <element id="library" level="project" name="Maven: commons-beanutils:commons-beanutils:1.8.0" />
+            <element id="library" level="project" name="Maven: commons-collections:commons-collections:3.2.1" />
+            <element id="library" level="project" name="Maven: net.sf.ezmorph:ezmorph:1.0.6" />
+            <element id="library" level="project" name="json-lib-2.4-jdk15" />
+          </element>
+        </element>
       </element>
     </root>
   </artifact>

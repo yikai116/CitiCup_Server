@@ -43,7 +43,7 @@ public class GetProController {
     }
 
     @RequestMapping(value = "/getInsuProById", method = RequestMethod.POST)
-    public Response getInsuProById(String id){
+    public Response getInsuProById(int id){
         return new Response<InsuPro>().SUCCESS(proService.getInsuProById(id));
     }
 }

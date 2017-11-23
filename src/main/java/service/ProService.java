@@ -13,5 +13,5 @@ public interface ProService {
 
     ArrayList<FinaPro> getFinaPro(boolean reget);
 
-    InsuPro getInsuProById(String id);
+    InsuPro getInsuProById(int id);
 }

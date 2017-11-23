@@ -10,5 +10,5 @@ import java.util.List;
 public interface InsuProMapper {
     List<InsuPro> getPro(String[] key);
     InsuPro getOneRand();
-    InsuPro getOneById(String id);
+    InsuPro getOneById(int id);
 }

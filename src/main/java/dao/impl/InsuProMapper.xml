@@ -20,7 +20,7 @@
         ORDER BY RAND()
         LIMIT 0,1
     </select>
-    <select id="getOneById" parameterType="String" resultType="InsuPro">
+    <select id="getOneById" parameterType="int" resultType="InsuPro">
         SELECT *
         FROM insu_pro
         WHERE id = #{id}

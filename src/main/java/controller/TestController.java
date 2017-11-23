@@ -1,23 +1,21 @@
 package controller;
 
 import dao.*;
-import dto.QuesAns;
 import dto.response.FinaPreferInfo;
 import dto.response.InsuPreferInfo;
 import dto.response.Response;
-import dto.response.Status;
-import entity.FinaPrefer;
-import entity.InsuPrefer;
-import entity.InsuTest;
-import entity.RiskAbility;
+import entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import service.SimilarityService;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.xml.crypto.Data;
 import java.io.IOException;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 
 /**
  * Created by p on 2017/9/13.
@@ -34,9 +32,12 @@ public class TestController {
     private FinaPreferMapper finaPreferMapper;
     @Autowired
     private InsuTestMapper insuTestMapper;
-
     @Autowired
     private SimilarityService similarityService;
+    @Autowired
+    private InsuProMapper insuProMapper;
+    @Autowired
+    private ClickMapper clickMapper;
 
     @RequestMapping(value = "/setAbility", method = RequestMethod.POST)
     public Response setRiskAbility(int sco, HttpServletRequest request) {
@@ -98,11 +99,17 @@ public class TestController {
     }
 
     @RequestMapping(value = "/clickInsuPro", method = RequestMethod.POST)
-    public void clickInsuPro(String type) throws IllegalAccessException, NoSuchFieldException, IOException {
+    public void clickInsuPro(int id, HttpServletRequest request) throws IllegalAccessException, NoSuchFieldException, IOException {
+        Click click = new Click();
+        click.setTime(new Time(new Date().getTime()));
+        click.setPhone(String.valueOf(request.getAttribute("phone")));
+        click.setId(id);
+        clickMapper.insert(click);
+
+        InsuPro pro = insuProMapper.getOneById(id);
         ArrayList<String> keys = new ArrayList<>();
-        keys.add(type);
+        keys.add(pro.getType());
         similarityService.initInsuTest(keys);
         return;
     }
-
 }

@@ -72,7 +72,7 @@ public class ProServiceImpl implements ProService {
     }
 
     @Override
-    public InsuPro getInsuProById(String id) {
+    public InsuPro getInsuProById(int id) {
         return insuProMapper.getOneById(id);
     }
 
